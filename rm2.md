@@ -132,9 +132,9 @@ While the modules work without modifications, the following changes can be made:
 
 **Formula:**
 
-```
+`
 Vout = 0.8V × (1 + Rup/Rdown)
-```
+`
 
 **Resistor values for output voltages:**
 
