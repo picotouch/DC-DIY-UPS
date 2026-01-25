@@ -1,10 +1,14 @@
 # DCzilla - DC DIY UPS Documentation
 
-> ⚠️ **Personal Documentation:** This document is created for my personal use as a reminder and guide for the DCzilla DC UPS assembly procedure.
+> ⚠️ **Important Notice**
+> 
+> **Personal Documentation:** This document is created for my personal use as a reminder and guide for the DCzilla DC UPS assembly procedure.
 >
 > **No Liability:** I assume no responsibility for any components, modules, procedures described herein, or any resulting damage or injury.
 >
 > **Use at Your Own Risk:** Users must verify all information independently and follow proper safety procedures.
+>
+**For full disclaimer, see Legal Notice section at the end of this document.**
 
 &nbsp;
 ## Overview
@@ -49,7 +53,7 @@ DCzilla is a custom DC UPS (Uninterruptible Power Supply) solution designed to p
 
 ### DIYUPS3 Main PCB
 
-The DIYUPS3 is the central control board that manages power distribution, battery monitoring, and device communication.
+The DIYUPS3 is the main control board that manages power distribution, battery monitoring, DC/DC enable/disable control and device communication/configuration.
 
 **Key features:**
 - Accepts external DC power (19-20V) or battery power (12V)
