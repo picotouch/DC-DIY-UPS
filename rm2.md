@@ -53,7 +53,7 @@ DCzilla is a custom DC UPS (Uninterruptible Power Supply) solution designed to p
 
 ### DIYUPS3 Main PCB
 
-The DIYUPS3 is the main control board that manages power distribution, battery monitoring, DC/DC enable/disable control and device communication/configuration.
+The DIYUPS3 is the central control board of the system. Its key functions include: power distribution management, battery monitoring, DC/DC buck-boost bontrol (enable/disable), device configuration/communication.
 
 **Key features:**
 - Accepts external DC power (19-20V) or battery power (12V)
@@ -101,15 +101,15 @@ Rcs (Ω) = 0.12V / Ich (A)
 &nbsp;
 ### DC/DC Buck-Boost Converters (LTC3780)
 
-Pre-assembled modules based on the Analog Devices LTC3780 chip (Rev G).
+Pre-assembled modules based on the Analog Devices LTC3780 chip.
 
-#### Modifications
+#### Modifications:
 
 While the modules work without modifications, the following changes can be made:
 
 #### Remove CC Function (Constant Current Control)
 
-**Why:** Prevents premature over-current triggering during device startup (e.g., HDD spin-up)
+**Why:** Prevents fast/sensitive over-current triggering during device startup (e.g., HDD spin-up)
 
 **Note:** LTC3780 Short circuit protection remains active
 
@@ -127,6 +127,7 @@ While the modules work without modifications, the following changes can be made:
 
 **Note:** Both CC and UVLO functions are implemented on the same LM358 chip, simplifying the modification process.
 
+&nbsp;
 ### LTC3780 Voltage Adjustment (Fixed Resistors)
 
 **Formula:**
@@ -165,7 +166,7 @@ Vout = 0.8V × (1 + Rup/Rdown)
 
 **PCB, Battery and Enclosure Holders:**
 - Material: 3D printed plastic
-- Hardware: M3/M4 threaded inserts
+- Hardware: M3/M4 threaded inserts, screws
 
 &nbsp;
 ### Connectors
@@ -189,7 +190,7 @@ Vout = 0.8V × (1 + Rup/Rdown)
 ### External AC/DC Power Supply Requirements
 
 - **Output:** 19-20V DC
-- **Power rating:** >100W (based on total load)
+- **Power rating:** >>100W (based on total load)
 - **Connector:** XT60 male (replace original connector)
 
 **DCzilla Design capacity:** ~100W total
@@ -301,7 +302,7 @@ When `<pN:1>` is enabled, the system sends detailed status messages via USB.
 ```
 
 &nbsp;
-### PrintNotes Examples
+### PrintNotes Examples:
 
 #### DC/DC-1 Message Sequence
 
@@ -353,13 +354,14 @@ timeSHDWN1 (tS1) expired. DC/DC-1 turns OFF. Waiting next cycle (vH1 monitoring,
 
 **Note:** DC/DC-2 and DC/DC-3 follow the same message pattern with corresponding numbers.
 
+&nbsp;
 ### Battery Protection (bP)
 
 **Status:** Requires external Crowbar circuit (future), so set `<bP:0>` (disabled)
 
 **Functionality:** When enabled (148-154), Attiny GPIO will activate Crowbar, input fuse will blow
 
-**printNote message:**
+**BOVP printNote message:**
 
 ```json
 {"BOVP": true}
@@ -382,6 +384,7 @@ After 2 seconds, all DC/DC outputs turn OFF. Reset requires disconnecting both b
 Battery voltage in volts, updated every 500ms.
 
 &nbsp;
+&nbsp;
 ## Battery Voltage Threshold Configuration
 
 ### Understanding the Challenge
@@ -393,6 +396,7 @@ Battery-powered systems face a critical problem: **voltage hysteresis** causes o
 - **Voltage recovery:** Voltage rises (~0.25V) when load is removed
 - **Ping-pong effect:** Without proper thresholds, devices cycle on/off repeatedly
 
+&nbsp;
 ### Solution: Smart Sequential Shutdown
 
 By implementing adequate hysteresis (0.7-1.2V) between ON and OFF thresholds, combined with priority-based sequential shutdown, we can:
@@ -403,6 +407,7 @@ By implementing adequate hysteresis (0.7-1.2V) between ON and OFF thresholds, co
 
 **Strategy:** Shut down the least critical consumer first, reducing battery load and allowing voltage recovery, thereby postponing shutdown of critical systems.
 
+&nbsp;
 ### Battery Specifications
 
 **12V 9Ah VRLA Battery example:**
@@ -414,6 +419,7 @@ By implementing adequate hysteresis (0.7-1.2V) between ON and OFF thresholds, co
 | Internal resistance | ~14mΩ (fully charged) |
 | Recommended discharge end voltage | 10.8V - 11.1V |
 
+&nbsp;
 ### Example Load Configuration
 
 | Device | Input Spec | Power | Current @ 12V* | Priority |
@@ -430,9 +436,10 @@ By implementing adequate hysteresis (0.7-1.2V) between ON and OFF thresholds, co
 - Router + PC only: ~1.94 hours
 - Router only: ~4.5 hours
 
+&nbsp;
 ### Recommended Voltage Thresholds
 
-#### Strategy: Balanced (Default Configuration)
+#### Strategy: Balanced
 
 | Device | Boot/Shdwn | Turn ON | Turn OFF | Hysteresis |
 |--------|----------|---------|----------|-----------|
@@ -502,7 +509,7 @@ By implementing adequate hysteresis (0.7-1.2V) between ON and OFF thresholds, co
 
 ### Initial Configuration Steps
 
-1. **Configure and solder Rcs resistor** based on battery capacity
+1. **Configure and solder Rcs resistor on battery charger module** based on battery capacity
 2. **Install battery charger module** on DIYUPS3 PCB
 3. **Modify DC/DC converters** (optional but recommended)
 4. **Set output voltages** via fixed resistors or potentiometers
@@ -513,7 +520,7 @@ By implementing adequate hysteresis (0.7-1.2V) between ON and OFF thresholds, co
    - Output connectors (GX16)
    - USB configuration port (3 wire; GND, Tx, Rx)
    - Battery connections
-7. **Configure software** via USB serial connection
+7. **Configure device** via USB serial connection
 8. **Test voltage thresholds** with actual load
 
 > **Note:**
@@ -521,19 +528,22 @@ By implementing adequate hysteresis (0.7-1.2V) between ON and OFF thresholds, co
 > - Battery needs to be connected before external power supply
 
 &nbsp;
+&nbsp;
 ## Node-RED Integration
 
 **Flow:**
 - Import flow in Node-RED
 - Set COM port parameters
 
-**Dashboard:** At "Settings & Monitoring" page:
+**Dashboard:**
+At "Settings & Monitoring" page:
 - Use buttons to Read/Clear Common parameters and each DC/DC parameters
 - Use switch to enter device name for each DC/DC
 
 At "Notes" page:
 - Use Notes selector to set all or each DC/DC notes showing
 
+&nbsp;
 &nbsp;
 ## Safety Warnings
 
@@ -560,7 +570,7 @@ At "Notes" page:
 | **Number of outputs** | Up to 3 independent |
 | **Microcontroller** | ATtiny1614 |
 | **Communication** | USB serial (JSON format) |
-| **Dimensions** | 182mm width (Dell Optiplex compatible) |
+| **Dimensions** | 182mm width (Dell Optiplex Micro compatible) |
 | **Cooling** | Fanless (passive) |
 | **Fuse type** | Auto Mini Blade |
 
@@ -585,13 +595,16 @@ For questions, suggestions, or bug reports, please contact the developer.
 &nbsp;
 ## LTC3780 Modifications and Comments
 
-LTC3780 is DC/DC buck-boost converter IC. Pre-assembled modules featuring the popular LTC3780 chip (Analog Devices, [LTC3780 Rev G](https://www.analog.com/media/en/technical-documentation/data-sheets/ltc3780.pdf)) were used as the DC/DC converter.
+LTC3780 is DC/DC buck-boost converter IC. Pre-assembled modules featuring the popular LTC3780 chip (Analog Devices, 
+[LTC3780 Rev G](https://www.analog.com/media/en/technical-documentation/data-sheets/ltc3780.pdf)) were used as the DC/DC converter.
 
-After testing multiple modules, this one proved to be the best choice for this application. While some criticisms of this module can be found online, in my experience most issues are due to component defects (e.g., low-quality voltage regulation potentiometers) or improper handling (such as touching components in the voltage regulation circuit).
+After testing multiple modules, this one proved to be the best choice for this application. While some criticisms of this module 
+can be found online, in my experience most issues are due to component defects (e.g., low-quality voltage regulation potentiometers) 
+or improper handling (such as touching components in the voltage regulation circuit).
 
-Since this module includes some functions that are unnecessary for this application, minimal modifications are recommended.
+Since this module includes some functions that are unnecessary for this application, minimal modifications can be made.
 
-### Modifications
+### Modifications:
 
 &nbsp;
 #### Removal of the CC Function (Constant Current Control)
@@ -632,6 +645,8 @@ Vout = 0.8V × (1 + R_up / R_down)
 
 > **Do not use R-down lower than 6.8K.**
 
+
+&nbsp;
 &nbsp;
 &nbsp;
 ## Legal Notice and Disclaimer
@@ -684,7 +699,7 @@ The DIYUPS3 PCB is my personal design created for hobby/experimental purposes. I
 
 #### Pre-Made Modules
 
-Pre-assembled modules (LTC3780, SDLA12TA, CN3767, etc.) are third-party products:
+Pre-assembled modules (DC/DC buck-boost module LTC3780, battery charger module SDLA12TA, etc.) are third-party products:
 
 - I am not affiliated with any module manufacturer
 - Modules are used "as is" per manufacturer specifications
