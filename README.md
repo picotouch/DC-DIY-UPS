@@ -764,10 +764,16 @@ Vout = 0.8V × (1 + R_up / R_down)
 ### All modification
 
 <p align="left">
-  <img src="images/1_LTC3780_all_finished_1.png" width="70%"><br>
-  <sub>Yellow are Vout components</sub>
+  <img src="images/images/4_LTC3780_all.png" width="70%"><br>
+  <sub></sub>
 </p>
 
+&nbsp;
+
+<p align="left">
+  <img src="images/1_LTC3780_all_finished_1.png" width="70%"><br>
+  <sub></sub>
+</p>
 
 &nbsp;
 &nbsp;
