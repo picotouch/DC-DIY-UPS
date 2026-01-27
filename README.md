@@ -63,7 +63,11 @@ DCzilla is a custom DC UPS (Uninterruptible Power Supply) solution designed to p
 
 The DIYUPS3 is the central control board of the system. Its key functions include: power distribution management, battery monitoring, DC/DC buck-boost bontrol (enable/disable), device configuration/communication.
 
+&nbsp;
+
 <img src="images/DIYUPS3PCB.png" width="70%">
+
+&nbsp;
 
 **Key features:**
 - Accepts external DC power (19-20V) or battery power (12V)
@@ -75,6 +79,7 @@ The DIYUPS3 is the central control board of the system. Its key functions includ
 - ATtiny1614 microcontroller for management and monitoring
 
 &nbsp;
+
 ### Battery Charger Module (SDLA12TA)
 
 Pre-assembled charging module soldered directly onto the DIYUPS3 PCB.
@@ -101,6 +106,8 @@ Rcs (Ω) = 0.12V / Ich (A)
 | 7.2 Ah | 720 mA | 0.166 Ω |
 | 9.0 Ah | 900 mA | 0.133 Ω |
 
+&nbsp;
+
 ### Lead-Acid Battery Specifications
 
 - **Type:** SLA/VRLA (Sealed Lead Acid / Valve Regulated Lead Acid)
@@ -111,6 +118,7 @@ Rcs (Ω) = 0.12V / Ich (A)
 > **Important:** Ensure correct charging current by selecting appropriate Rcs resistor value.
 
 &nbsp;
+
 ### DC/DC Buck-Boost Converters (LTC3780)
 
 Pre-assembled modules based on the Analog Devices LTC3780 chip.
@@ -142,6 +150,7 @@ While the modules work without modifications, the following changes can be made:
 **Note:** Both CC and UVLO functions are implemented on the same LM358 chip, simplifying the modification process.
 
 &nbsp;
+
 ### LTC3780 Voltage Adjustment (Fixed Resistors)
 
 **Formula:**
@@ -163,6 +172,7 @@ Vout = 0.8V × (1 + Rup/Rdown)
 > **Important:** Do not use R-down lower than 6.8kΩ
 
 &nbsp;
+
 ### Metal Enclosure
 
 - **Material:** 1.5mm galvanized sheet metal
@@ -173,6 +183,7 @@ Vout = 0.8V × (1 + Rup/Rdown)
 <img src="images/box_top_cover_1.png" width="45%"> <img src="images/box_bottom_cover_1.png" width="45%">
 
 &nbsp;
+
 ### 3D Printed Components
 
 **Front/Rear Panels:**
@@ -236,6 +247,7 @@ Vout = 0.8V × (1 + Rup/Rdown)
 **Note:** 3-pin variant used for Dell Optiplex Micro with DS2501 power supply decoder chip.
 
 &nbsp;
+
 ### External AC/DC Power Supply Requirements
 
 - **Output:** 19-20V DC
@@ -251,6 +263,7 @@ Vout = 0.8V × (1 + Rup/Rdown)
 > **Important:** Always select a power supply rated above expected maximum load.
 
 &nbsp;
+
 ## Software Configuration
 
 ### Command Reference
@@ -258,6 +271,7 @@ Vout = 0.8V × (1 + Rup/Rdown)
 All commands use angle bracket format: `<command:value>`
 
 &nbsp;
+
 ### Common Settings
 
 | Command | Parameter | Range | Default | Test Value | Description |
@@ -285,6 +299,7 @@ All commands use angle bracket format: `<command:value>`
 When `<pN:1>` is enabled, the system sends detailed status messages via USB.
 
 &nbsp;
+
 ### DC/DC-1 Settings
 
 | Command | Parameter | Range | Default | Test Value | Description |
@@ -302,6 +317,7 @@ When `<pN:1>` is enabled, the system sends detailed status messages via USB.
 ```
 
 &nbsp;
+
 ### DC/DC-2 Settings
 
 | Command | Parameter | Range | Default | Test Value | Description |
@@ -319,6 +335,7 @@ When `<pN:1>` is enabled, the system sends detailed status messages via USB.
 ```
 
 &nbsp;
+
 ### DC/DC-3 Settings
 
 | Command | Parameter | Range | Default | Test Value | Description |
@@ -336,6 +353,7 @@ When `<pN:1>` is enabled, the system sends detailed status messages via USB.
 ```
 
 &nbsp;
+
 ### System Commands
 
 | Command | Description |
@@ -351,6 +369,7 @@ When `<pN:1>` is enabled, the system sends detailed status messages via USB.
 ```
 
 &nbsp;
+
 ### PrintNotes Examples:
 
 #### DC/DC-1 Message Sequence
@@ -404,6 +423,7 @@ timeSHDWN1 (tS1) expired. DC/DC-1 turns OFF. Waiting next cycle (vH1 monitoring,
 **Note:** DC/DC-2 and DC/DC-3 follow the same message pattern with corresponding numbers.
 
 &nbsp;
+
 ### Battery Protection (bP)
 
 **Status:** Requires external Crowbar circuit (future), so set `<bP:0>` (disabled)
@@ -419,6 +439,7 @@ timeSHDWN1 (tS1) expired. DC/DC-1 turns OFF. Waiting next cycle (vH1 monitoring,
 After 2 seconds, all DC/DC outputs turn OFF. Reset requires disconnecting both battery and DC power supply.
 
 &nbsp;
+
 ### Voltage Monitoring (vM)
 
 - **Enable:** `<vM:1>` (500ms interval)
@@ -434,6 +455,7 @@ Battery voltage in volts, updated every 500ms.
 
 &nbsp;
 &nbsp;
+
 ## Battery Voltage Threshold Configuration
 
 ### Understanding the Challenge
@@ -446,6 +468,7 @@ Battery-powered systems face a critical problem: **voltage hysteresis** causes o
 - **Ping-pong effect:** Without proper thresholds, devices cycle on/off repeatedly
 
 &nbsp;
+
 ### Solution: Smart Sequential Shutdown
 
 By implementing adequate hysteresis (0.7-1.2V) between ON and OFF thresholds, combined with priority-based sequential shutdown, we can:
@@ -457,6 +480,7 @@ By implementing adequate hysteresis (0.7-1.2V) between ON and OFF thresholds, co
 **Strategy:** Shut down the least critical consumer first, reducing battery load and allowing voltage recovery, thereby postponing shutdown of critical systems.
 
 &nbsp;
+
 ### Battery Specifications
 
 **12V 9Ah VRLA Battery example:**
@@ -469,6 +493,7 @@ By implementing adequate hysteresis (0.7-1.2V) between ON and OFF thresholds, co
 | Recommended discharge end voltage | 10.8V - 11.1V |
 
 &nbsp;
+
 ### Example Load Configuration
 
 | Device | Input Spec | Power | Current @ 12V* | Priority |
@@ -486,6 +511,7 @@ By implementing adequate hysteresis (0.7-1.2V) between ON and OFF thresholds, co
 - Router only: ~4.5 hours
 
 &nbsp;
+
 ### Recommended Voltage Thresholds
 
 #### Strategy: Balanced
@@ -501,6 +527,7 @@ By implementing adequate hysteresis (0.7-1.2V) between ON and OFF thresholds, co
 - **Hysteresis 0.7-1.2V:** Prevents oscillations with safety margin for voltage recovery
 
 &nbsp;
+
 ### Operating Sequences
 
 #### Power Restoration Sequence (During Charging)
@@ -554,6 +581,7 @@ By implementing adequate hysteresis (0.7-1.2V) between ON and OFF thresholds, co
 - **No-oscillation rule:** Each device's recovery voltage must be below the next device's turn-on voltage
 
 &nbsp;
+
 ## Installation and Setup
 
 ### Initial Configuration Steps
@@ -578,6 +606,7 @@ By implementing adequate hysteresis (0.7-1.2V) between ON and OFF thresholds, co
 
 &nbsp;
 &nbsp;
+
 ## Node-RED Integration
 
 **Flow:**
@@ -594,6 +623,7 @@ At "Notes" page:
 
 &nbsp;
 &nbsp;
+
 ## Safety Warnings
 
 ⚠️ **Important Safety Information:**
@@ -608,6 +638,7 @@ At "Notes" page:
 - Do not exceed rated power limits
 
 &nbsp;
+
 ## Technical Specifications Summary
 
 | Parameter | Value |
@@ -624,6 +655,7 @@ At "Notes" page:
 | **Fuse type** | Auto Mini Blade |
 
 &nbsp;
+
 ## Revision History
 
 | Current firmware version | Date | Changes |
@@ -631,17 +663,20 @@ At "Notes" page:
 | 7.2 | 19.01.2026 | Initial full |
 
 &nbsp;
+
 ## Comments, Questions and Other
 
 For questions, suggestions, or bug reports, please contact the developer.
 
 &nbsp;
+
 **Recommended tools for configuration:**
 - Serial terminal (PuTTY, Arduino IDE Serial Monitor)
 - Node-RED
 
 &nbsp;
 &nbsp;
+
 ## LTC3780 Modifications and Comments
 
 LTC3780 is DC/DC buck-boost converter IC. Pre-assembled modules featuring the popular LTC3780 chip (Analog Devices, 
@@ -656,6 +691,7 @@ Since this module includes some functions that are unnecessary for this applicat
 ### Modifications:
 
 &nbsp;
+
 #### Removal of the CC Function (Constant Current Control)
 
 This function can be too fast or sensitive for demanding loads. Over-current protection may trigger when a connected device, such as an HDD, draws a higher current at startup.
@@ -668,6 +704,7 @@ It is important to note that removing the CC function does **not** disable modul
 </p>
 
 &nbsp;
+
 #### Removal of the UVLO Function (Under-Voltage Lockout)
 
 This function prevents excessive battery discharge when running on battery. Since the same function is implemented in the ATtiny microcontroller (and is user-programmable), the module UVLO is not required.
@@ -682,6 +719,7 @@ Both the CC and UVLO functions are implemented on the same chip (LM358), which s
 </p>
 
 &nbsp;
+
 ### Voltage Adjustment (CV)
 
 The output voltage is controlled by a multi-turn potentiometer, which can be replaced with a fixed resistor. The potentiometer can cause voltage fluctuations due to its high resistance (500 kΩ) being sensitive to touch, or due to contact loss in low-quality units/parts. Replacing it with a fixed resistor solves both issues. Use a 1206 SMD resistor for R-up and an 0805 for R-down.
@@ -722,6 +760,7 @@ Vout = 0.8V × (1 + R_up / R_down)
 
 &nbsp;
 &nbsp;
+
 ## Legal Notice and Disclaimer
 
 ### Purpose of This Document
