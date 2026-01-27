@@ -764,7 +764,7 @@ Vout = 0.8V × (1 + R_up / R_down)
 ### All modification
 
 <p align="left">
-  <img src="images/images/4_LTC3780_all.png" width="70%"><br>
+  <img src="images/4_LTC3780_all.png" width="70%"><br>
   <sub></sub>
 </p>
 
