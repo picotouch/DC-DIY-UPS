@@ -55,6 +55,8 @@ DCzilla is a custom DC UPS (Uninterruptible Power Supply) solution designed to p
 
 The DIYUPS3 is the central control board of the system. Its key functions include: power distribution management, battery monitoring, DC/DC buck-boost bontrol (enable/disable), device configuration/communication.
 
+<img src="images/DIYUPS3PCB.png" width="70%">
+
 **Key features:**
 - Accepts external DC power (19-20V) or battery power (12V)
 - Ideal diode controller with MOSFET (Active OR'ing)
@@ -68,6 +70,8 @@ The DIYUPS3 is the central control board of the system. Its key functions includ
 ### Battery Charger Module (SDLA12TA)
 
 Pre-assembled charging module soldered directly onto the DIYUPS3 PCB.
+
+<img src="images/battery_charger_module2.png" width="30%">
 
 **Configuration:** The original Rcs resistor (0.4Ω) should be replaced to achieve optimal charging current at 1/10 of battery capacity.
 
@@ -102,6 +106,8 @@ Rcs (Ω) = 0.12V / Ich (A)
 ### DC/DC Buck-Boost Converters (LTC3780)
 
 Pre-assembled modules based on the Analog Devices LTC3780 chip.
+
+<img src="images/1_LTC3780_top_view_full.png" width="70%">
 
 #### Modifications:
 
@@ -156,6 +162,8 @@ Vout = 0.8V × (1 + Rup/Rdown)
 - **Width:** 182mm (matches Dell Optiplex Micro)
 - **Features:** Air circulation openings, mounting holes for PCB brackets
 
+<img src="images/box_top_cover_1.png" width="45%"> <img src="images/box_bottom_cover_1.png" width="45%">
+
 &nbsp;
 ### 3D Printed Components
 
@@ -167,6 +175,39 @@ Vout = 0.8V × (1 + Rup/Rdown)
 **PCB, Battery and Enclosure Holders:**
 - Material: 3D printed plastic
 - Hardware: M3/M4 threaded inserts, screws
+
+<table border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align="center" valign="middle">
+      <img src="images/main_pcb_holder.png" width="120"><br>
+      <small>Main PCB Holder(x2)</small>
+    </td>
+    <td width="30"></td>
+    <td align="center" valign="middle">
+      <img src="images/dcdc_holder.png" width="220"><br>
+      <small>DC-DC Holder(x2)</small>
+    </td>
+    <td width="30"></td>
+    <td align="center" valign="middle">
+      <img src="images/leg.png" width="30"><br>
+      <small>Leg(x2)</small>
+    </td>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align="center" valign="middle">
+      <img src="images/2front_side_and_battery.png" width="37"><br>
+      <small>Front Panel, Enclosure and Battery(x2)</small>
+    </td>
+    <td width="30"></td>
+    <td align="center" valign="middle">
+      <img src="images/back.png" width="25"><br>
+      <small>Back Panel and Enclosure(x2)</small>
+    </td>
+  </tr>
+</table>
 
 &nbsp;
 ### Connectors
