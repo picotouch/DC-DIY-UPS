@@ -36,8 +36,6 @@ DCzilla is a custom DC UPS (Uninterruptible Power Supply) solution designed to p
 
 ## System Architecture
 
-&nbsp;
-
 ### Block diagram
 
 &nbsp;
@@ -68,7 +66,7 @@ DCzilla is a custom DC UPS (Uninterruptible Power Supply) solution designed to p
 
 ### DIYUPS3 Main PCB
 
-The DIYUPS3 is the central control board of the system. Its key functions include: power distribution management, battery monitoring, DC/DC buck-boost bontrol (enable/disable), device configuration/communication.
+The DIYUPS3 is the central control board of the system. Its key functions include: power distribution management, battery monitoring, DC/DC buck-boost bontrol (enable/disable) and device configuration/communication.
 
 &nbsp;
 
@@ -150,8 +148,7 @@ While the modules work without modifications, the following changes can be made:
 
 #### Replace CV Potentiometer with Fixed Resistor
 
-**Why:** Eliminates voltage fluctuations from potentiometer sensitivity and contact issues
-
+**Why:** Eliminates voltage fluctuations caused by the high-resistance potentiometer (500kΩ) being sensitive to touch and contact issues in low-quality units
 **Implementation:** Use SMD resistors (1206 for R-up, 0805 for R-down, resistor size match PCB layout)
 
 #### Remove UVLO Function (Under-Voltage Lockout)
@@ -191,13 +188,13 @@ Vout = 0.8V × (1 + Rup/Rdown)
 - **Material:** 1.5mm galvanized sheet metal
 - **Design:** Two identical U-shaped sections
 - **Width:** 182mm (matches Dell Optiplex Micro)
-- **Features:** Air circulation openings, mounting holes for PCB brackets
+- **Features:** Air circulation openings, mounting holes for PCB holders
 
 <img src="images/box_top_cover_1.png" width="45%"> <img src="images/box_bottom_cover_1.png" width="45%">
 
 &nbsp;
 
-### 3D Printed Components
+### 3D Printed Components and others
 
 **Front/Rear Panels:**
 - Total thickness: 7mm (5mm external + 2mm internal)
@@ -242,6 +239,7 @@ Vout = 0.8V × (1 + Rup/Rdown)
 </table>
 
 &nbsp;
+
 ### Connectors
 
 | Connector Type | Purpose | Quantity | Notes |
@@ -399,7 +397,7 @@ When `<pN:1>` is enabled, the system sends detailed status messages via USB.
 {"DC/DC1 note": "DC/DC 1 is ON, stop monitoring. Start tB1"}
 ```
 
-DC/DC-1 activates. Voltage monitoring vH1 stop. Start timeBOOT1 timer (tB1).
+DC/DC-1 activates. Voltage monitoring vH1 stop. Start timeBOOT1 timer (tB1). DC/DC1 is in ON state during tB1 time (proper boot procedure).
 
 **timeBOOT1 completed:**
 
@@ -449,7 +447,7 @@ timeSHDWN1 (tS1) expired. DC/DC-1 turns OFF. Waiting next cycle (vH1 monitoring,
 {"BOVP": true}
 ```
 
-After 2 seconds, all DC/DC outputs turn OFF. Reset requires disconnecting both battery and DC power supply.
+After 2 seconds, all DC/DC turn OFF. Reset requires disconnecting both battery and DC power supply.
 
 &nbsp;
 
@@ -516,7 +514,7 @@ By implementing adequate hysteresis (0.7-1.2V) between ON and OFF thresholds, co
 | NAS | 12V 2A | 24W | 2.00A | Lowest |
 | **TOTAL** | — | **76.5W** | **6.64A** | — |
 
-*Assuming 90% DC-DC converter efficiency for PC
+*Assuming 90% DC-DC converter efficiency
 
 **Theoretical Runtime:**
 - All devices: ~1.36 hours
@@ -551,7 +549,7 @@ By implementing adequate hysteresis (0.7-1.2V) between ON and OFF thresholds, co
 | 2 | 12.70V | PC turns ON | Voltage drops to ~12.45V | Stable voltage confirmed |
 | 3 | 13.00V | NAS turns ON | Full system operational | Battery nearly full |
 
-**Note:** Charging typically continues to ~13.8V for full battery charge.
+**Note:** Charging typically continues to ~ 13.5 - 13.8V for full battery charge.
 
 #### Shutdown Sequence (During Power Loss)
 
@@ -599,8 +597,8 @@ By implementing adequate hysteresis (0.7-1.2V) between ON and OFF thresholds, co
 
 ### Initial Configuration Steps
 
-1. **Configure and solder Rcs resistor on battery charger module** based on battery capacity
-2. **Install battery charger module** on DIYUPS3 PCB
+1. **Solder the appropriate resistor based on battery capacity**
+2. **Solder battery charger module** on DIYUPS3 PCB
 3. **Modify DC/DC converters** (optional but recommended)
 4. **Set output voltages** via fixed resistors or potentiometers
 5. **Mount components** in enclosure using 3D printed holders
@@ -720,7 +718,7 @@ It is important to note that removing the CC function does **not** disable modul
 
 #### Removal of the UVLO Function (Under-Voltage Lockout)
 
-This function prevents excessive battery discharge when running on battery. Since the same function is implemented in the ATtiny microcontroller (and is user-programmable), the module UVLO is not required.
+This function prevents excessive battery discharge when running on battery. Since the same function is implemented in the ATtiny microcontroller (user-programmable), the module UVLO is not required.
 
 To use UVLO via the microcontroller, solder a 1-pin header (M) to the pin behind the IN connector and connect it to the corresponding header on the DIYUPS3 using a jumper wire (F-F).
 
