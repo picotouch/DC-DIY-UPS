@@ -33,6 +33,14 @@ DCzilla is a custom DC UPS (Uninterruptible Power Supply) solution designed to p
 
 &nbsp;
 ## System Architecture
+&nbsp;
+### Block diagram
+&nbsp;
+<p align="left">
+  <img src="images/block_diagram.png" width="70%"><br>
+  <sub></sub>
+</p>
+&nbsp;
 
 ### System Components
 
@@ -654,6 +662,11 @@ This function can be too fast or sensitive for demanding loads. Over-current pro
 
 It is important to note that removing the CC function does **not** disable module over-current protection. A short circuit at the output will still blow the fuse, protecting the module from damage.
 
+<p align="left">
+  <img src="images/2_LTC3780_cc.png" width="70%"><br>
+  <sub>Yellow are CC components</sub>
+</p>
+
 &nbsp;
 #### Removal of the UVLO Function (Under-Voltage Lockout)
 
@@ -662,6 +675,11 @@ This function prevents excessive battery discharge when running on battery. Sinc
 To use UVLO via the microcontroller, solder a 1-pin header (M) to the pin behind the IN connector and connect it to the corresponding header on the DIYUPS3 using a jumper wire (F-F).
 
 Both the CC and UVLO functions are implemented on the same chip (LM358), which simplifies the modifications.
+
+<p align="left">
+  <img src="images/3_LTC3780_uvlo.png" width="70%"><br>
+  <sub>Yellow are CC components</sub>
+</p>
 
 &nbsp;
 ### Voltage Adjustment (CV)
@@ -686,8 +704,22 @@ Vout = 0.8V × (1 + R_up / R_down)
 
 > **Do not use R-down lower than 6.8K.**
 
+<p align="left">
+  <img src="images/1_LTC3780_voltage.png" width="70%"><br>
+  <sub>Yellow are Vout components</sub>
+</p>
 
 &nbsp;
+&nbsp;
+
+### All modification
+
+<p align="left">
+  <img src="images/1_LTC3780_all_finished_1.png" width="70%"><br>
+  <sub>Yellow are Vout components</sub>
+</p>
+
+
 &nbsp;
 &nbsp;
 ## Legal Notice and Disclaimer
