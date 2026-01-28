@@ -20,7 +20,6 @@ DCzilla is a custom DC UPS (Uninterruptible Power Supply) solution designed to p
 
 &nbsp;
 ## Key Features
-
 - **Multiple outputs:** Up to 3 independent DC outputs, each configurable to 5V, 9V, 12V, 15V, or 19V
 - **Smart battery management:** User-defined high/low voltage thresholds for automatic output control (Node-RED)
 - **Configurable timing:** Customizable power-up and power-down delays for safe shutdown sequences (Node-RED)
@@ -76,6 +75,7 @@ The DIYUPS3 is the central control board of the system. Its key functions includ
 &nbsp;
 
 **System Architecture:**
+
 The PCB is a straightforward design based on a three-path Ideal Diode ORing controller that automatically routes power from either the AC/DC adapter (19V when mains power is present) or the battery (12V during power outage) to the DC/DC buck-boost converters. This ensures seamless transition between power sources without interruption.
 DC/DC converter control (enable/disable) is managed by the ATtiny1614 microcontroller based on battery voltage thresholds and configured timing parameters (tBx/tSx). The same microcontroller also handles battery voltage monitoring and serial communication via USB interface.
 Battery charging is performed independently by a dedicated charging module (SDLA12TA) mounted directly on this PCB.
