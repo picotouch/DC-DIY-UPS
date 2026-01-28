@@ -66,7 +66,7 @@ DCzilla is a custom DC UPS (Uninterruptible Power Supply) solution designed to p
 
 ### DIYUPS3 Main PCB
 
-The DIYUPS3 is the central control board of the system. Its key functions include: power distribution management, battery monitoring, DC/DC buck-boost bontrol (enable/disable) and device configuration/communication.
+The DIYUPS3 is the central control board of the system. Its key functions include: power distribution management, battery monitoring, DC/DC buck-boost control (enable/disable) and device configuration/communication.
 
 &nbsp;
 
@@ -195,7 +195,7 @@ Vout = 0.8V × (1 + Rup/Rdown)
 
 &nbsp;
 
-### 3D Printed Components and others
+### 3D Printed Components and Others Parts
 
 **Front/Rear Panels:**
 - Total thickness: 7mm (5mm external + 2mm internal)
@@ -263,7 +263,7 @@ Vout = 0.8V × (1 + Rup/Rdown)
 ### External AC/DC Power Supply Requirements
 
 - **Output:** 19-20V DC
-- **Power rating:** >>100W (based on total load)
+- **Power rating:** >100W (based on total load)
 - **Connector:** XT60 male (replace original connector)
 
 **DCzilla Design capacity:** ~100W total
@@ -440,7 +440,7 @@ timeSHDWN1 (tS1) expired. DC/DC-1 turns OFF. Waiting next cycle (vH1 monitoring,
 
 **Status:** Requires external Crowbar circuit (future), so set `<bP:0>` (disabled)
 
-**Functionality:** When enabled (148-154), Attiny GPIO will activate Crowbar, input fuse will blow
+**Functionality:** When enabled (148-154), ATtiny GPIO will activate Crowbar, input fuse will blow
 
 **BOVP printNote message:**
 
