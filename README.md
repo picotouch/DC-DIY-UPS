@@ -102,9 +102,9 @@ Pre-assembled charging module soldered directly onto the DIYUPS3 PCB.
 
 **Calculation formula:**
 
-```
-Rcs (Ω) = 0.12V / Ich (A)
-```
+$R_{cs} (\Omega) = \frac{0.12V}{I_{ch} (A)}$
+
+&nbsp;
 
 **Rcs values for different battery capacities:**
 
@@ -762,7 +762,7 @@ The output voltage is controlled by a multi-turn potentiometer, which can be rep
 
 The formula for calculating resistors for different output voltages is:
 
-$$V_{out} = 0.8V \times \left(1 + \frac{R_{up}}{R_{down}}\right)$$
+$$\begin{align*} & V_{out} = 0.8V \times \left(1 + \frac{R_{up}}{R_{down}}\right) \end{align*}$$
 
 **Values for various voltages:**
 
