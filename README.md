@@ -638,7 +638,6 @@ At "Settings & Monitoring" page:
 </p>
 
 &nbsp;
-&nbsp;
 
 At "Notes" page:
 - Use Notes selector to set all or each DC/DC notes showing
@@ -650,7 +649,6 @@ At "Notes" page:
   <sub></sub>
 </p>
 
-&nbsp;
 &nbsp;
 
 ## Safety Warnings
