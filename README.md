@@ -53,7 +53,7 @@ DCzilla is a custom DC UPS (Uninterruptible Power Supply) solution designed to p
 | **DIYUPS3 PCB** | Main control board with ATtiny1614 microcontroller |
 | **DC/DC Converters** | LTC3780-based buck-boost modules (up to 3) |
 | **Battery Charger** | SDLA12TA pre-assembled charging module |
-| **Battery** | 12V 7Ah or 9Ah SLA/VRLA lead-acid battery |
+| **Battery** | 12V 7-9Ah SLA/VRLA lead-acid battery |
 | **Enclosure** | 1.5mm galvanized sheet metal, U-shaped design |
 | **Front/Rear Panels** | 3D printed (7mm total thickness) |
 | **PCB Holders** | 3D printed with M3/M4 threaded inserts |
@@ -166,9 +166,7 @@ While the modules work without modifications, the following changes can be made:
 
 **Formula:**
 
-```
-Vout = 0.8V × (1 + Rup/Rdown)
-```
+$$V_{out} = 0.8V \times \left(1 + \frac{R_{up}}{R_{down}}\right)$$
 
 **Resistor values for output voltages:**
 
@@ -195,7 +193,7 @@ Vout = 0.8V × (1 + Rup/Rdown)
 
 &nbsp;
 
-### 3D Printed Components and Others Parts
+### 3D Printed Components and Other Parts
 
 **Front/Rear Panels:**
 - Total thickness: 7mm (5mm external + 2mm internal)
@@ -283,6 +281,17 @@ Vout = 0.8V × (1 + Rup/Rdown)
 All commands use angle bracket format: `<command:value>`
 
 &nbsp;
+
+## Software Configuration
+
+### Voltage and Time Terminology
+- **vHx** (voltage High): Turn-ON voltage threshold (battery voltage rising)
+- **vLx** (voltage Low): Turn-OFF voltage threshold (battery voltage falling)
+- **tBx** (time Boot): Delay after device turns ON (allows proper boot sequence)
+- **tSx** (time Shutdown): Delay before device turns OFF (allows graceful shutdown)
+Where **x** represents DC/DC output number (1, 2, or 3).
+
+### Command Reference
 
 ### Common Settings
 
@@ -742,7 +751,7 @@ Both the CC and UVLO functions are implemented on the same chip (LM358), which s
 
 <p align="left">
   <img src="images/3_LTC3780_uvlo.png" width="70%"><br>
-  <sub>Yellow are CC components</sub>
+  <sub>Yellow are UVLO components</sub>
 </p>
 
 &nbsp;
@@ -753,9 +762,7 @@ The output voltage is controlled by a multi-turn potentiometer, which can be rep
 
 The formula for calculating resistors for different output voltages is:
 
-```
-Vout = 0.8V × (1 + R_up / R_down)
-```
+$$V_{out} = 0.8V \times \left(1 + \frac{R_{up}}{R_{down}}\right)$$
 
 **Values for various voltages:**
 
@@ -877,5 +884,8 @@ Use of this documentation constitutes acceptance of all terms in this disclaimer
 ---
 
 **Document Version:** 1.0  
-**Last Updated:** January 2026  
+**Last Updated:** 19 January 2026  
 **For personal use only**
+
+**License:** This documentation is provided for personal, non-commercial use only.  
+Redistribution or commercial use is not permitted without explicit permission.
