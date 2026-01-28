@@ -166,7 +166,9 @@ While the modules work without modifications, the following changes can be made:
 
 **Formula:**
 
-$$V_{out} = 0.8V \times \left(1 + \frac{R_{up}}{R_{down}}\right)$$
+$V_{out} = 0.8V \times \left(1 + \frac{R_{up}}{R_{down}}\right)$
+
+&nbsp;
 
 **Resistor values for output voltages:**
 
@@ -762,7 +764,9 @@ The output voltage is controlled by a multi-turn potentiometer, which can be rep
 
 The formula for calculating resistors for different output voltages is:
 
-$$\begin{align*} & V_{out} = 0.8V \times \left(1 + \frac{R_{up}}{R_{down}}\right) \end{align*}$$
+$V_{out} = 0.8V \times \left(1 + \frac{R_{up}}{R_{down}}\right)$
+
+&nbsp;
 
 **Values for various voltages:**
 
