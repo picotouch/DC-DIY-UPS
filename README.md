@@ -44,6 +44,7 @@ DCzilla is a custom DC UPS (Uninterruptible Power Supply) solution designed to p
   <img src="images/block_diagram.png" width="70%"><br>
   <sub></sub>
 </p>
+
 &nbsp;
 
 ### System Components
