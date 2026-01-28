@@ -629,8 +629,25 @@ At "Settings & Monitoring" page:
 - Use buttons to Read/Clear Common parameters and each DC/DC parameters
 - Use switch to enter device name for each DC/DC
 
+&nbsp;
+
+<p align="left">
+  <img src="images/1_dczilla_control_panel_1.png" width="70%"><br>
+  <sub></sub>
+</p>
+
+&nbsp;
+&nbsp;
+
 At "Notes" page:
 - Use Notes selector to set all or each DC/DC notes showing
+
+&nbsp;
+
+<p align="left">
+  <img src="images/1_real_power_fail.png" width="70%"><br>
+  <sub></sub>
+</p>
 
 &nbsp;
 &nbsp;
