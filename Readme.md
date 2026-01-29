@@ -286,13 +286,6 @@ All commands use angle bracket format: `<command:value>`
 
 ## Software Configuration
 
-### Voltage and Time Terminology
-- **vHx** (voltage High): Turn-ON voltage threshold (battery voltage rising)
-- **vLx** (voltage Low): Turn-OFF voltage threshold (battery voltage falling)
-- **tBx** (time Boot): Delay after device turns ON (allows proper boot sequence)
-- **tSx** (time Shutdown): Delay before device turns OFF (allows graceful shutdown)
-Where **x** represents DC/DC output number (1, 2, or 3).
-
 ### Command Reference
 
 ### Common Settings
@@ -330,8 +323,8 @@ When `<pN:1>` is enabled, the system sends detailed status messages via USB.
 | `<r1>` | — | — | — | — | Read DC/DC-1 settings |
 | `<tB1:x>` | timeBOOT1 | 1-900 | 300 | 10 | Boot delay (seconds) |
 | `<tS1:x>` | timeSHDWN1 | 1-900 | 300 | 10 | Shutdown delay (seconds) |
-| `<vH1:x>` | volt.High1 | 100-130 | 125 | 110 | Turn ON voltage (×0.1V) |
-| `<vL1:x>` | volt.Low1 | 100-130 | 110 | 105 | Turn OFF voltage (×0.1V) |
+| `<vH1:x>` | voltageHigh1 | 100-130 | 125 | 110 | Turn ON voltage (×0.1V) |
+| `<vL1:x>` | voltageLow1 | 100-130 | 110 | 105 | Turn OFF voltage (×0.1V) |
 
 **`<r1>` response example:**
 
@@ -348,8 +341,8 @@ When `<pN:1>` is enabled, the system sends detailed status messages via USB.
 | `<r2>` | — | — | — | — | Read DC/DC-2 settings |
 | `<tB2:x>` | timeBOOT2 | 1-900 | 1 | 10 | Boot delay (seconds) |
 | `<tS2:x>` | timeSHDWN2 | 1-900 | 1 | 10 | Shutdown delay (seconds) |
-| `<vH2:x>` | volt.High2 | 100-130 | 125 | 120 | Turn ON voltage (×0.1V) |
-| `<vL2:x>` | volt.Low2 | 100-130 | 110 | 115 | Turn OFF voltage (×0.1V) |
+| `<vH2:x>` | voltageHigh2 | 100-130 | 125 | 120 | Turn ON voltage (×0.1V) |
+| `<vL2:x>` | voltageLow2 | 100-130 | 110 | 115 | Turn OFF voltage (×0.1V) |
 
 **`<r2>` response example:**
 
@@ -427,7 +420,7 @@ timeBOOT1 (tB1) expired. Normal working mode. Start monitoring vL1.
 
 Voltage monitoring vL1 stop. Start shutdown time (tS1). DC/DC1 is in ON state during tS1 time (proper shutdown procedure).
 
-**Shutdown command (if tS1 > 10 seconds):**
+  * **Shutdown command (if tS1 > 10 seconds):**
 
 ```json
 {"DC/DC1 note": "send shutdown command"}
@@ -555,21 +548,21 @@ By implementing adequate hysteresis (0.7-1.2V) between ON and OFF thresholds, co
 
 #### Power Restoration Sequence (During Charging)
 
-| Step | Voltage | Action | Load Effect | Status |
-|------|---------|--------|-------------|--------|
-| 1 | 12.40V | Router turns ON | Voltage drops to ~12.20V | Critical device first |
-| 2 | 12.70V | PC turns ON | Voltage drops to ~12.45V | Stable voltage confirmed |
-| 3 | 13.00V | NAS turns ON | Full system operational | Battery nearly full |
+| Step | Voltage | Action | Load Effect |
+|------|---------|--------|-------------|
+| 1 | 12.40V | Router turns ON | Voltage drops to ~12.20V |
+| 2 | 12.70V | PC turns ON | Voltage drops to ~12.45V |
+| 3 | 13.00V | NAS turns ON | Full system operational |
 
 **Note:** Charging typically continues to ~ 13.5 - 13.8V for full battery charge.
 
 #### Shutdown Sequence (During Power Loss)
 
-| Step | Voltage | Action | Voltage Recovery | Status | Result |
-|------|---------|--------|---------|--------|--------|
-| 1 | 12.30V | NAS shuts OFF | → 12.55V | Below PC ON (12.70V) | Load reduced, voltage stabilizes |
-| 2 | 11.90V | PC shuts OFF | → 12.15V | Below Router ON (12.40V) | Further load reduction |
-| 3 | 11.20V | Router shuts OFF | — | End of autonomy | System fully offline |
+| Step | Voltage | Action | Voltage Recovery | Status |
+|------|---------|--------|---------|--------|
+| 1 | 12.30V | NAS shuts OFF | → 12.55V | Below PC ON (12.70V) |
+| 2 | 11.90V | PC shuts OFF | → 12.15V | Below Router ON (12.40V) |
+| 3 | 11.20V | Router shuts OFF | — | End of autonomy |
 
 **Result:** No oscillations - each recovery voltage stays safely below the next device's turn-on threshold.
 
@@ -609,7 +602,7 @@ By implementing adequate hysteresis (0.7-1.2V) between ON and OFF thresholds, co
 
 ### Initial Configuration Steps
 
-1. **Solder the appropriate resistor based on battery capacity**
+1. **Solder the appropriate resistor on SDLA12TA based on battery capacity**
 2. **Solder battery charger module** on DIYUPS3 PCB
 3. **Modify DC/DC converters** (optional but recommended)
 4. **Set output voltages** via fixed resistors or potentiometers
@@ -619,9 +612,10 @@ By implementing adequate hysteresis (0.7-1.2V) between ON and OFF thresholds, co
    - DC/DC module ON/OFF control wires
    - Output connectors (GX16)
    - USB configuration port (3 wire; GND, Tx, Rx)
-   - Battery connections
-7. **Configure device** via USB serial connection
-8. **Test voltage thresholds** with actual load
+   - Battery input
+7. **Connect battery and then AC/DC**
+8. **Configure device** via USB serial connection
+9. **Test voltage thresholds** with actual load
 
 > **Note:**
 > - System will turn ON immediately, regardless of which power source is connected, external or battery
@@ -684,8 +678,8 @@ At "Notes" page:
 | **Input voltage** | 19-20V DC |
 | **Battery** | 12V 7-9Ah SLA/VRLA |
 | **Output voltages** | 5V, 9V, 12V, 15V, 19V (configurable) |
-| **Maximum power** | ~100W total |
 | **Number of outputs** | Up to 3 independent |
+| **Maximum power** | ~100W total |
 | **Microcontroller** | ATtiny1614 |
 | **Communication** | USB serial (JSON format) |
 | **Dimensions** | 182mm width (Dell Optiplex Micro compatible) |
@@ -760,7 +754,7 @@ Both the CC and UVLO functions are implemented on the same chip (LM358), which s
 
 ### Voltage Adjustment (CV)
 
-The output voltage is controlled by a multi-turn potentiometer, which can be replaced with a fixed resistor. The potentiometer can cause voltage fluctuations due to its high resistance (500 kΩ) being sensitive to touch, or due to contact loss in low-quality units/parts. Replacing it with a fixed resistor solves both issues. Use a 1206 SMD resistor for R-up and an 0805 for R-down.
+The output voltage is controlled by a multi-turn potentiometer, which can be replaced with a fixed resistor. The potentiometer can cause voltage fluctuations due to its high resistance (500 kΩ) being sensitive to touch, or due to contact loss in low-quality units/parts. Replacing it with a fixed resistor solves both issues. Use a 1206 SMD resistor for R_up and an 0805 for R_down.
 
 The formula for calculating resistors for different output voltages is:
 
