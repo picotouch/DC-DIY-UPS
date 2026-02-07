@@ -77,7 +77,7 @@ The DIYUPS3 is the central control board of the system. Its key functions includ
 **System Architecture:**
 
 The PCB is a straightforward design based on a three-path Ideal Diode ORing controller that automatically routes power from either the AC/DC adapter (19V when mains power is present) or the battery (12V during power outage) to the DC/DC buck-boost converters. This ensures seamless transition between power sources without interruption.
-DC/DC converter control (enable/disable) is managed by the ATtiny1614 microcontroller based on battery voltage thresholds and configured timing parameters (tBx/tSx). The same microcontroller also handles battery voltage monitoring and serial communication via USB interface.
+DC/DC converter control (enable/disable) is managed by the ATtiny1614 microcontroller based on battery voltage thresholds(vHx/vLx) and configured timing parameters (tBx/tSx). The same microcontroller also handles battery voltage monitoring and serial communication via USB interface.
 Battery charging is performed independently by a dedicated charging module (SDLA12TA) mounted directly on this PCB.
 
 **Key features:**
@@ -137,28 +137,32 @@ Pre-assembled modules based on the Analog Devices LTC3780 chip.
 
 <img src="images/1_LTC3780_top_view_full.png" width="70%">
 
-#### Modifications:
 
-While the modules work without modifications, the following changes can be made:
+### Modifications:
 
-#### Remove CC Function (Constant Current Control)
+&nbsp; While the modules work without modifications, the following changes can be made:
 
-**Why:** Prevents fast/sensitive over-current triggering during device startup (e.g., HDD spin-up)
 
-**Note:** LTC3780 Short circuit protection remains active
+#### Remove CC Function (Constant Current Control):
 
-#### Replace CV Potentiometer with Fixed Resistor
+- **Why:** Prevents fast/sensitive over-current triggering during device startup (e.g., HDD spin-up)
 
-**Why:** Eliminates voltage fluctuations caused by the high-resistance potentiometer (500kΩ) being sensitive to touch and contact issues in low-quality units
-**Implementation:** Use SMD resistors (1206 for R-up, 0805 for R-down, resistor size match PCB layout)
+- **Note:** LTC3780 Short circuit protection remains active
 
-#### Remove UVLO Function (Under-Voltage Lockout)
 
-**Why:** UVLO is handled by ATtiny microcontroller with user-programmable settings
+#### Replace CV Potentiometer with Fixed Resistor:
 
-**Implementation:** Solder 1-pin header (M) behind IN connector, connect to DIYUPS3 with F-F jumper wire
+- **Why:** Eliminates voltage fluctuations caused by the high-resistance potentiometer (500kΩ) being sensitive to touch and contact issues in low-quality units
+- **Implementation:** Use SMD resistors (1206 for R-up, 0805 for R-down, resistor size match PCB layout)
 
-**Note:** Both CC and UVLO functions are implemented on the same LM358 chip, simplifying the modification process.
+
+#### Remove UVLO Function (Under-Voltage Lockout):
+
+- **Why:** UVLO is handled by ATtiny microcontroller with user-programmable settings
+
+- **Implementation:** Solder 1-pin header (M) behind IN connector, connect to DIYUPS3 with F-F jumper wire
+
+- **Note:** Both CC and UVLO functions are implemented on the same LM358 chip, simplifying the modification process.
 
 &nbsp;
 
