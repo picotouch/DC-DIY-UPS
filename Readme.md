@@ -685,7 +685,7 @@ At "Notes" page:
 | **Number of outputs** | Up to 3 independent |
 | **Maximum power** | ~100W total |
 | **Microcontroller** | ATtiny1614 |
-| **Communication** | USB serial (JSON format) |
+| **Communication** | Serial (USB) |
 | **Dimensions** | 182mm width (Dell Optiplex Micro compatible) |
 | **Cooling** | Fanless (passive) |
 | **Fuse type** | Auto Mini Blade |
@@ -712,6 +712,7 @@ For questions, suggestions, or bug reports, please contact the developer.
 
 &nbsp;
 &nbsp;
+
 
 ## LTC3780 Modifications and Comments
 
