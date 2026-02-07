@@ -140,7 +140,7 @@ Pre-assembled modules based on the Analog Devices LTC3780 chip.
 
 ### Modifications:
 
-&nbsp; While the modules work without modifications, the following changes can be made:
+While the modules work without modifications, the following changes can be made:
 
 
 #### Remove CC Function (Constant Current Control):
