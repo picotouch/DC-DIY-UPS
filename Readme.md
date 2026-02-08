@@ -245,12 +245,12 @@ $V_{out} = 0.8V \times \left(1 + \frac{R_{up}}{R_{down}}\right)$
 
 &nbsp;
 
-### Connectors
+### Connectors(Enclosure)
 
 | Connector Type | Purpose | Quantity | Notes |
 |---|---|---|---|
 | XT60 (male) | DC input | 1 | Power supply input |
-| GX16 (3 or 5-pin) | DC outputs | 3 | DC output, Pin 1=GND, Pins 2-5 for +voltages |
+| GX16 (3 or 5-pin male) | DC outputs | 3 | DC output, Pin 1=GND, Pins 2-5 for +voltages |
 | USB Type A (female) | Communication | 1 | Configuration and monitoring |
 
 **GX16 pin assignments (to avoid mismatch connection):**
@@ -268,7 +268,7 @@ $V_{out} = 0.8V \times \left(1 + \frac{R_{up}}{R_{down}}\right)$
 
 - **Output:** 19-20V DC
 - **Power rating:** >100W (based on total load)
-- **Connector:** XT60 male (replace original connector)
+- **Connector:** XT60 female (replace original connector)
 
 **DCzilla Design capacity:** ~100W total
 
