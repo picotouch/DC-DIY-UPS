@@ -1,4 +1,4 @@
-# DCzilla - DC DIY UPS Documentation
+# DCzilla - DIY DC UPS Documentation
 
 > ⚠️ **Important Notice**
 > 
