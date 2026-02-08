@@ -26,7 +26,7 @@ DCzilla is a custom DC UPS (Uninterruptible Power Supply) solution designed to p
 - **Status monitoring:** Real-time status messages via COM port (serial/Node-RED)
 - **Battery voltage monitoring:** Continuous battery voltage tracking (serial/Node-RED)
 - **Modular design:** Uses pre-assembled DC-DC buck/boost converters and battery charging modules
-- **Standard DC input:** 19-20V AC/DC supply (standard notebook adapter)
+- **DC input:** 19-20V AC/DC supply (standard notebook adapter)
 - **Lead-acid battery:** 12V, 7-9Ah SLA/VRLA battery (standard UPS type)
 - **Fanless operation:** Silent operation without cooling fan
 - **Compact design:** Width matches Dell Optiplex Micro (182mm)
