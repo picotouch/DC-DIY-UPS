@@ -21,10 +21,10 @@ DCzilla is a custom DC UPS (Uninterruptible Power Supply) solution designed to p
 &nbsp;
 ## Key Features
 - **Multiple outputs:** Up to 3 independent DC outputs, each configurable to 5V, 9V, 12V, 15V, or 19V
-- **Smart battery management:** User-defined high/low voltage thresholds for automatic output control (Node-RED)
-- **Configurable timing:** Customizable power-up and power-down delays for safe shutdown sequences (Node-RED)
-- **Status monitoring:** Real-time status messages via COM port (Node-RED)
-- **Battery voltage monitoring:** Continuous battery voltage tracking (Node-RED)
+- **Smart battery management:** User-defined high/low voltage thresholds for automatic output control (serial/Node-RED)
+- **Configurable timing:** Customizable power-up and power-down delays for safe boot & shutdown sequences (serial/Node-RED)
+- **Status monitoring:** Real-time status messages via COM port (serial/Node-RED)
+- **Battery voltage monitoring:** Continuous battery voltage tracking (serial/Node-RED)
 - **Modular design:** Uses pre-assembled DC-DC buck/boost converters and battery charging modules
 - **Standard DC input:** 19-20V AC/DC supply (standard notebook adapter)
 - **Lead-acid battery:** 12V, 7-9Ah SLA/VRLA battery (standard UPS type)
